@@ -54,8 +54,19 @@ def detect_fake_news():
     text_vectorized = vectorizer.transform([text_preprocessed])
     # Fazer a previsão utilizando o modelo treinado
     prediction_prob = model.predict_proba(text_vectorized)
+    
     # Extrair a probabilidade de ser fake news
-    probability = prediction_prob[0][list(model.classes_).index('fake')]
+    classes = model.classes_
+    fake_index = None
+    if 'fake' in classes:
+        fake_index = list(classes).index('fake')
+    
+    if fake_index is not None:
+        probability = prediction_prob[0][fake_index]
+    else:
+        probability = 0.0
+    
     return jsonify({'probability': probability})
+
 if __name__ == '__main__':
     app.run(debug=True)
