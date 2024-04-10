@@ -1,11 +1,11 @@
 function detectarFakeNews() {
     var text = document.getElementById("textInput").value;
-    fetch('/detect', {
+    fetch('http://127.0.0.1:5000/detect', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ text: text })
+        body: JSON.stringify({ text: 'texto da noticia' })
     })
     .then(response => response.json())
     .then(data => {

@@ -30,11 +30,11 @@ def preprocess_text(text):
     # Reconstruir o texto após a remoção das stopwords
     text = ' '.join(filtered_tokens)
     return text
-data['Texto'] = data['Texto'].str.lower()
+data['text'] = data['text'].str.lower()
 
 # Features (X) e labels (y)
-X = data['Texto']
-y = data['Rótulo']
+X = data['text']
+y = data['label']
 
 # Vetorização do texto usando TF-IDF
 vectorizer = TfidfVectorizer(max_features=5000)
