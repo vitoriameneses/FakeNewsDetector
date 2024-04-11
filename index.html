@@ -14,7 +14,28 @@
     </form>
     <p id="result"></p>
 
-    <script src="script.js"></script>
+    <script>
+        function detectarFakeNews() {
+            var text = document.getElementById("textInput").value;
+            fetch('/detect', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ text: text }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.is_fake) {
+                    document.getElementById("result").innerText = "Esta notícia é provavelmente falsa.";
+                } else {
+                    document.getElementById("result").innerText = "Esta notícia é provavelmente verdadeira.";
+                }
+            })
+            .catch((error) => {
+                console.error('Erro:', error);
+            });
+        }
+    </script>
 </body>
 </html>
-
